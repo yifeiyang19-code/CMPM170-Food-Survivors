@@ -160,13 +160,17 @@ if (spatial) {
 }
 if(!spatial&&player.cool<=0){if(mode==='manual'&&(mouse.down||keys.has(' '))){shoot(mouse.x,mouse.y);player.cool=.21}else if(mode==='auto'){const e=nearest();if(e){shoot(e.x,e.y);player.cool=.44}}}
 for(const b of bullets){b.x+=b.vx*dt;b.y+=b.vy*dt;b.life-=dt;if(b.x<0||b.x>W||b.y<0||b.y>H)b.life=0}
-for(const e of enemies){if(e.hp<=0)continue;const vx=player.x-e.x,vy=player.y-e.y,d=Math.hypot(vx,vy)||1;e.x+=vx/d*e.speed*dt;e.y+=vy/d*e.speed*dt;if(!cyclone&&d<e.r+18&&player.inv<=0){player.hp=Math.max(0,player.hp-e.damage);player.inv=.7;stats.damage+=e.damage;const hit = {time:+clock.toFixed(2),kind:'damage',value:e.damage,hp:player.hp};
+for(const e of enemies){if(e.hp<=0)continue;const vx=player.x-e.x,vy=player.y-e.y,d=Math.hypot(vx,vy)||1;e.x+=vx/d*e.speed*dt;e.y+=vy/d*e.speed*dt;if(!cyclone&&d<e.r+18&&player.inv<=0){const damage = Math.min(player.hp, e.damage);
+player.hp -= damage;
+player.inv = .7;
+stats.damage += damage;
+const hit = {time:+clock.toFixed(2),kind:'damage',value:damage,hp:player.hp};
 if (spatial) {
   stats.damageHits++;
   hit.x = player.x;
   hit.y = player.y;
 } else {
-  stats.modes[mode].damage+=e.damage;
+  stats.modes[mode].damage += damage;
   hit.mode = mode;
 }
 stats.events.push(hit)}}
