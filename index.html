@@ -47,6 +47,8 @@ a{color:#a8deff;text-underline-offset:3px}a:focus-visible,button:focus-visible{o
 const requestedMode = new URLSearchParams(location.search).get('mode');
 if (requestedMode !== 'p1' && requestedMode !== 'p2') return;
 const spatial = requestedMode === 'p2';
+const qaSurvival = new URLSearchParams(location.search).get('qa') === 'survival';
+const startingHealth = qaSurvival ? 10000 : 100;
 const c=document.getElementById('game'),g=c.getContext('2d'),W=c.width,H=c.height,$=id=>document.getElementById(id),DURATION=180;
 const skills = {
   knife: { name: 'Knife Sweep', cooldown: 6, radius: 110, halfAngle: Math.PI / 3 },
@@ -71,9 +73,10 @@ if (spatial) {
   $('columns').innerHTML = '<th>Skill</th><th>Casts</th><th>Kills</th><th>Empty casts</th>';
   $('interview').textContent = 'Ask the player: How did you position yourself for each skill? When did you use the cyclone?';
 }
+if (qaSurvival) $('subtitle').textContent += ' · QA only · 10,000 starting HP';
 let phase='ready',mode='manual',clock=0,last=0,spawner=0,player,enemies=[],bullets=[],keys=new Set(),mouse={x:600,y:300,down:false},stats,raf,id=0;
 let facing, readyAt, effects, cyclone, pendingCasts, castsToReview;
-function reset(){cancelAnimationFrame(raf);phase='ready';mode='manual';clock=0;spawner=0;id=0;player={x:480,y:300,hp:100,cool:0,inv:0};enemies=[];bullets=[];keys.clear();mouse.down=false;stats={switches:0,kills:0,damage:0,modes:{manual:{time:0,shots:0,hits:0,kills:0,damage:0},auto:{time:0,shots:0,hits:0,kills:0,damage:0}},events:[]};
+function reset(){cancelAnimationFrame(raf);phase='ready';mode='manual';clock=0;spawner=0;id=0;player={x:480,y:300,hp:startingHealth,cool:0,inv:0};enemies=[];bullets=[];keys.clear();mouse.down=false;stats={switches:0,kills:0,damage:0,modes:{manual:{time:0,shots:0,hits:0,kills:0,damage:0},auto:{time:0,shots:0,hits:0,kills:0,damage:0}},events:[]};
 if (spatial) {
   facing = 0;
   readyAt = { knife: 0, fork: 0, whisk: 0 };
@@ -278,6 +281,6 @@ if(!e.repeat){
   if(spatial&&Object.hasOwn(skillKeys,k))pendingCasts.push(skillKeys[k]);
   if(!spatial&&(k==='m'||k==='tab'))switchMode();
 }
-keys.add(k)});window.addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));window.addEventListener('blur',()=>{keys.clear();mouse.down=false;if(spatial)pendingCasts.length=0});c.addEventListener('pointermove',e=>Object.assign(mouse,aim(e)));c.addEventListener('pointerdown',e=>{Object.assign(mouse,aim(e));mouse.down=true});window.addEventListener('pointerup',()=>mouse.down=false);$('start').onclick=start;$('startP2').onclick=start;$('switch').onclick=switchMode;$('download').onclick=()=>{const data={project:'Food Survivors',prototype:spatial?2:1,experiment:spatial?'skill-placement':'fire-mode-switching',duration:clock,health:player.hp,stats,questions:spatial?spatialQuestions:['When and why did you switch?','Which mode felt most useful?','Was the current mode clear?']};const u=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=u;a.download=`food-survivors-${requestedMode}-playtest.json`;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};reset();
+keys.add(k)});window.addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));window.addEventListener('blur',()=>{keys.clear();mouse.down=false;if(spatial)pendingCasts.length=0});c.addEventListener('pointermove',e=>Object.assign(mouse,aim(e)));c.addEventListener('pointerdown',e=>{Object.assign(mouse,aim(e));mouse.down=true});window.addEventListener('pointerup',()=>mouse.down=false);$('start').onclick=start;$('startP2').onclick=start;$('switch').onclick=switchMode;$('download').onclick=()=>{const data={project:'Food Survivors',...(qaSurvival ? {qa: 'survival', startingHealth} : {}),prototype:spatial?2:1,experiment:spatial?'skill-placement':'fire-mode-switching',duration:clock,health:player.hp,stats,questions:spatial?spatialQuestions:['When and why did you switch?','Which mode felt most useful?','Was the current mode clear?']};const u=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=u;a.download=`food-survivors-${requestedMode}-playtest.json`;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};reset();
 })();
 </script></body></html>
