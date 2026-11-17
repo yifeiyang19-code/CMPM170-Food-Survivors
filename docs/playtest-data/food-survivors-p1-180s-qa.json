@@ -1,0 +1,1544 @@
+{
+  "project": "Food Survivors",
+  "qa": "survival",
+  "startingHealth": 10000,
+  "prototype": 1,
+  "experiment": "fire-mode-switching",
+  "duration": 180,
+  "health": 7915,
+  "stats": {
+    "switches": 11,
+    "kills": 118,
+    "damage": 2085,
+    "modes": {
+      "manual": {
+        "time": 56.87659999999783,
+        "shots": 64,
+        "hits": 60,
+        "kills": 24,
+        "damage": 508
+      },
+      "auto": {
+        "time": 123.1233999999974,
+        "shots": 274,
+        "hits": 272,
+        "kills": 94,
+        "damage": 1577
+      }
+    },
+    "events": [
+      {
+        "time": 7.6,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9993,
+        "mode": "manual"
+      },
+      {
+        "time": 8.32,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9986,
+        "mode": "manual"
+      },
+      {
+        "time": 9.15,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9979,
+        "mode": "manual"
+      },
+      {
+        "time": 13.78,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9972,
+        "mode": "manual"
+      },
+      {
+        "time": 14.48,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9965,
+        "mode": "manual"
+      },
+      {
+        "time": 14.77,
+        "kind": "switch",
+        "from": "manual",
+        "to": "auto",
+        "hp": 9965,
+        "enemies": 11
+      },
+      {
+        "time": 15.2,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9958,
+        "mode": "auto"
+      },
+      {
+        "time": 15.92,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9951,
+        "mode": "auto"
+      },
+      {
+        "time": 16.63,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9939,
+        "mode": "auto"
+      },
+      {
+        "time": 17.33,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9932,
+        "mode": "auto"
+      },
+      {
+        "time": 18.05,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9920,
+        "mode": "auto"
+      },
+      {
+        "time": 18.75,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9910,
+        "mode": "auto"
+      },
+      {
+        "time": 19.47,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9898,
+        "mode": "auto"
+      },
+      {
+        "time": 20.18,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9886,
+        "mode": "auto"
+      },
+      {
+        "time": 20.9,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9879,
+        "mode": "auto"
+      },
+      {
+        "time": 21.2,
+        "kind": "switch",
+        "from": "auto",
+        "to": "manual",
+        "hp": 9879,
+        "enemies": 13
+      },
+      {
+        "time": 21.82,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9869,
+        "mode": "manual"
+      },
+      {
+        "time": 23.85,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9857,
+        "mode": "manual"
+      },
+      {
+        "time": 24.55,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9847,
+        "mode": "manual"
+      },
+      {
+        "time": 26.05,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9840,
+        "mode": "manual"
+      },
+      {
+        "time": 26.76,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9830,
+        "mode": "manual"
+      },
+      {
+        "time": 27.61,
+        "kind": "switch",
+        "from": "manual",
+        "to": "auto",
+        "hp": 9830,
+        "enemies": 12
+      },
+      {
+        "time": 27.95,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9818,
+        "mode": "auto"
+      },
+      {
+        "time": 28.66,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9806,
+        "mode": "auto"
+      },
+      {
+        "time": 29.36,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9794,
+        "mode": "auto"
+      },
+      {
+        "time": 30.23,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9784,
+        "mode": "auto"
+      },
+      {
+        "time": 34.08,
+        "kind": "switch",
+        "from": "auto",
+        "to": "manual",
+        "hp": 9784,
+        "enemies": 16
+      },
+      {
+        "time": 35.48,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9777,
+        "mode": "manual"
+      },
+      {
+        "time": 36.2,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9765,
+        "mode": "manual"
+      },
+      {
+        "time": 36.9,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9755,
+        "mode": "manual"
+      },
+      {
+        "time": 37.61,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9743,
+        "mode": "manual"
+      },
+      {
+        "time": 38.33,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9731,
+        "mode": "manual"
+      },
+      {
+        "time": 39.05,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9719,
+        "mode": "manual"
+      },
+      {
+        "time": 39.76,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9707,
+        "mode": "manual"
+      },
+      {
+        "time": 40.48,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9695,
+        "mode": "manual"
+      },
+      {
+        "time": 41.2,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9683,
+        "mode": "manual"
+      },
+      {
+        "time": 41.91,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9671,
+        "mode": "manual"
+      },
+      {
+        "time": 42.63,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9659,
+        "mode": "manual"
+      },
+      {
+        "time": 43.35,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9647,
+        "mode": "manual"
+      },
+      {
+        "time": 44.06,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9635,
+        "mode": "manual"
+      },
+      {
+        "time": 44.78,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9623,
+        "mode": "manual"
+      },
+      {
+        "time": 45.48,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9611,
+        "mode": "manual"
+      },
+      {
+        "time": 46.2,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9599,
+        "mode": "manual"
+      },
+      {
+        "time": 46.91,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9587,
+        "mode": "manual"
+      },
+      {
+        "time": 47.63,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9575,
+        "mode": "manual"
+      },
+      {
+        "time": 48.33,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9563,
+        "mode": "manual"
+      },
+      {
+        "time": 49.04,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9551,
+        "mode": "manual"
+      },
+      {
+        "time": 49.76,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9539,
+        "mode": "manual"
+      },
+      {
+        "time": 50.48,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9527,
+        "mode": "manual"
+      },
+      {
+        "time": 51.18,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9515,
+        "mode": "manual"
+      },
+      {
+        "time": 51.49,
+        "kind": "switch",
+        "from": "manual",
+        "to": "auto",
+        "hp": 9515,
+        "enemies": 38
+      },
+      {
+        "time": 52.53,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9503,
+        "mode": "auto"
+      },
+      {
+        "time": 55.16,
+        "kind": "switch",
+        "from": "auto",
+        "to": "manual",
+        "hp": 9503,
+        "enemies": 41
+      },
+      {
+        "time": 56.04,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9496,
+        "mode": "manual"
+      },
+      {
+        "time": 56.89,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9489,
+        "mode": "manual"
+      },
+      {
+        "time": 57.59,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9479,
+        "mode": "manual"
+      },
+      {
+        "time": 58.13,
+        "kind": "switch",
+        "from": "manual",
+        "to": "auto",
+        "hp": 9479,
+        "enemies": 44
+      },
+      {
+        "time": 58.31,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9472,
+        "mode": "auto"
+      },
+      {
+        "time": 64.53,
+        "kind": "switch",
+        "from": "auto",
+        "to": "manual",
+        "hp": 9472,
+        "enemies": 46
+      },
+      {
+        "time": 65.51,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9465,
+        "mode": "manual"
+      },
+      {
+        "time": 66.23,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9453,
+        "mode": "manual"
+      },
+      {
+        "time": 71.43,
+        "kind": "switch",
+        "from": "manual",
+        "to": "auto",
+        "hp": 9453,
+        "enemies": 50
+      },
+      {
+        "time": 71.96,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9446,
+        "mode": "auto"
+      },
+      {
+        "time": 72.84,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9436,
+        "mode": "auto"
+      },
+      {
+        "time": 73.56,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9424,
+        "mode": "auto"
+      },
+      {
+        "time": 74.27,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9412,
+        "mode": "auto"
+      },
+      {
+        "time": 76.99,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9400,
+        "mode": "auto"
+      },
+      {
+        "time": 77.86,
+        "kind": "switch",
+        "from": "auto",
+        "to": "manual",
+        "hp": 9400,
+        "enemies": 58
+      },
+      {
+        "time": 77.99,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9393,
+        "mode": "manual"
+      },
+      {
+        "time": 78.69,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9381,
+        "mode": "manual"
+      },
+      {
+        "time": 79.39,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9369,
+        "mode": "manual"
+      },
+      {
+        "time": 80.09,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9362,
+        "mode": "manual"
+      },
+      {
+        "time": 80.81,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9355,
+        "mode": "manual"
+      },
+      {
+        "time": 81.52,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9348,
+        "mode": "manual"
+      },
+      {
+        "time": 82.24,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9338,
+        "mode": "manual"
+      },
+      {
+        "time": 82.94,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9328,
+        "mode": "manual"
+      },
+      {
+        "time": 83.66,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9318,
+        "mode": "manual"
+      },
+      {
+        "time": 84.36,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9308,
+        "mode": "manual"
+      },
+      {
+        "time": 85.06,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9298,
+        "mode": "manual"
+      },
+      {
+        "time": 85.77,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9288,
+        "mode": "manual"
+      },
+      {
+        "time": 86.27,
+        "kind": "switch",
+        "from": "manual",
+        "to": "auto",
+        "hp": 9288,
+        "enemies": 73
+      },
+      {
+        "time": 86.49,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9276,
+        "mode": "auto"
+      },
+      {
+        "time": 87.19,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9264,
+        "mode": "auto"
+      },
+      {
+        "time": 87.91,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9252,
+        "mode": "auto"
+      },
+      {
+        "time": 88.62,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9240,
+        "mode": "auto"
+      },
+      {
+        "time": 89.34,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9228,
+        "mode": "auto"
+      },
+      {
+        "time": 90.04,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9216,
+        "mode": "auto"
+      },
+      {
+        "time": 90.76,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9204,
+        "mode": "auto"
+      },
+      {
+        "time": 91.46,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9192,
+        "mode": "auto"
+      },
+      {
+        "time": 92.16,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9180,
+        "mode": "auto"
+      },
+      {
+        "time": 92.87,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9168,
+        "mode": "auto"
+      },
+      {
+        "time": 93.57,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9158,
+        "mode": "auto"
+      },
+      {
+        "time": 94.29,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9148,
+        "mode": "auto"
+      },
+      {
+        "time": 94.99,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9138,
+        "mode": "auto"
+      },
+      {
+        "time": 95.71,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9128,
+        "mode": "auto"
+      },
+      {
+        "time": 96.41,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9118,
+        "mode": "auto"
+      },
+      {
+        "time": 97.12,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9108,
+        "mode": "auto"
+      },
+      {
+        "time": 97.84,
+        "kind": "damage",
+        "value": 7,
+        "hp": 9101,
+        "mode": "auto"
+      },
+      {
+        "time": 98.54,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9091,
+        "mode": "auto"
+      },
+      {
+        "time": 99.24,
+        "kind": "damage",
+        "value": 10,
+        "hp": 9081,
+        "mode": "auto"
+      },
+      {
+        "time": 99.95,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9069,
+        "mode": "auto"
+      },
+      {
+        "time": 100.65,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9057,
+        "mode": "auto"
+      },
+      {
+        "time": 101.36,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9045,
+        "mode": "auto"
+      },
+      {
+        "time": 102.07,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9033,
+        "mode": "auto"
+      },
+      {
+        "time": 102.79,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9021,
+        "mode": "auto"
+      },
+      {
+        "time": 103.5,
+        "kind": "damage",
+        "value": 12,
+        "hp": 9009,
+        "mode": "auto"
+      },
+      {
+        "time": 104.2,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8997,
+        "mode": "auto"
+      },
+      {
+        "time": 104.92,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8985,
+        "mode": "auto"
+      },
+      {
+        "time": 105.64,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8975,
+        "mode": "auto"
+      },
+      {
+        "time": 106.34,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8965,
+        "mode": "auto"
+      },
+      {
+        "time": 107.05,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8958,
+        "mode": "auto"
+      },
+      {
+        "time": 107.77,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8951,
+        "mode": "auto"
+      },
+      {
+        "time": 108.47,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8941,
+        "mode": "auto"
+      },
+      {
+        "time": 109.19,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8931,
+        "mode": "auto"
+      },
+      {
+        "time": 109.9,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8919,
+        "mode": "auto"
+      },
+      {
+        "time": 110.62,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8907,
+        "mode": "auto"
+      },
+      {
+        "time": 111.34,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8895,
+        "mode": "auto"
+      },
+      {
+        "time": 112.05,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8885,
+        "mode": "auto"
+      },
+      {
+        "time": 112.75,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8875,
+        "mode": "auto"
+      },
+      {
+        "time": 113.47,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8863,
+        "mode": "auto"
+      },
+      {
+        "time": 114.17,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8851,
+        "mode": "auto"
+      },
+      {
+        "time": 114.89,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8844,
+        "mode": "auto"
+      },
+      {
+        "time": 115.59,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8832,
+        "mode": "auto"
+      },
+      {
+        "time": 116.29,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8820,
+        "mode": "auto"
+      },
+      {
+        "time": 117,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8808,
+        "mode": "auto"
+      },
+      {
+        "time": 117.72,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8801,
+        "mode": "auto"
+      },
+      {
+        "time": 118.44,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8791,
+        "mode": "auto"
+      },
+      {
+        "time": 119.15,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8781,
+        "mode": "auto"
+      },
+      {
+        "time": 119.87,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8774,
+        "mode": "auto"
+      },
+      {
+        "time": 120.59,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8762,
+        "mode": "auto"
+      },
+      {
+        "time": 121.3,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8750,
+        "mode": "auto"
+      },
+      {
+        "time": 122,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8738,
+        "mode": "auto"
+      },
+      {
+        "time": 122.72,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8731,
+        "mode": "auto"
+      },
+      {
+        "time": 123.42,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8724,
+        "mode": "auto"
+      },
+      {
+        "time": 124.14,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8714,
+        "mode": "auto"
+      },
+      {
+        "time": 124.84,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8702,
+        "mode": "auto"
+      },
+      {
+        "time": 125.55,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8690,
+        "mode": "auto"
+      },
+      {
+        "time": 126.27,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8678,
+        "mode": "auto"
+      },
+      {
+        "time": 126.99,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8666,
+        "mode": "auto"
+      },
+      {
+        "time": 127.7,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8654,
+        "mode": "auto"
+      },
+      {
+        "time": 128.4,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8642,
+        "mode": "auto"
+      },
+      {
+        "time": 129.12,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8630,
+        "mode": "auto"
+      },
+      {
+        "time": 129.83,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8618,
+        "mode": "auto"
+      },
+      {
+        "time": 130.55,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8606,
+        "mode": "auto"
+      },
+      {
+        "time": 131.25,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8594,
+        "mode": "auto"
+      },
+      {
+        "time": 131.95,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8582,
+        "mode": "auto"
+      },
+      {
+        "time": 132.67,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8570,
+        "mode": "auto"
+      },
+      {
+        "time": 133.37,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8558,
+        "mode": "auto"
+      },
+      {
+        "time": 134.07,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8546,
+        "mode": "auto"
+      },
+      {
+        "time": 134.78,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8534,
+        "mode": "auto"
+      },
+      {
+        "time": 135.48,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8524,
+        "mode": "auto"
+      },
+      {
+        "time": 136.2,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8514,
+        "mode": "auto"
+      },
+      {
+        "time": 136.9,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8507,
+        "mode": "auto"
+      },
+      {
+        "time": 137.62,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8495,
+        "mode": "auto"
+      },
+      {
+        "time": 138.33,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8483,
+        "mode": "auto"
+      },
+      {
+        "time": 139.03,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8476,
+        "mode": "auto"
+      },
+      {
+        "time": 139.75,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8469,
+        "mode": "auto"
+      },
+      {
+        "time": 140.45,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8459,
+        "mode": "auto"
+      },
+      {
+        "time": 141.17,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8447,
+        "mode": "auto"
+      },
+      {
+        "time": 141.88,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8435,
+        "mode": "auto"
+      },
+      {
+        "time": 142.6,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8423,
+        "mode": "auto"
+      },
+      {
+        "time": 143.3,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8413,
+        "mode": "auto"
+      },
+      {
+        "time": 144.02,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8403,
+        "mode": "auto"
+      },
+      {
+        "time": 144.73,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8396,
+        "mode": "auto"
+      },
+      {
+        "time": 145.45,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8389,
+        "mode": "auto"
+      },
+      {
+        "time": 146.15,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8377,
+        "mode": "auto"
+      },
+      {
+        "time": 146.87,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8365,
+        "mode": "auto"
+      },
+      {
+        "time": 147.57,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8353,
+        "mode": "auto"
+      },
+      {
+        "time": 148.28,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8346,
+        "mode": "auto"
+      },
+      {
+        "time": 149,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8334,
+        "mode": "auto"
+      },
+      {
+        "time": 149.7,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8322,
+        "mode": "auto"
+      },
+      {
+        "time": 150.4,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8310,
+        "mode": "auto"
+      },
+      {
+        "time": 151.11,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8303,
+        "mode": "auto"
+      },
+      {
+        "time": 151.83,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8296,
+        "mode": "auto"
+      },
+      {
+        "time": 152.53,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8289,
+        "mode": "auto"
+      },
+      {
+        "time": 153.25,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8282,
+        "mode": "auto"
+      },
+      {
+        "time": 153.95,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8270,
+        "mode": "auto"
+      },
+      {
+        "time": 154.66,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8260,
+        "mode": "auto"
+      },
+      {
+        "time": 155.38,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8250,
+        "mode": "auto"
+      },
+      {
+        "time": 156.08,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8243,
+        "mode": "auto"
+      },
+      {
+        "time": 156.8,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8233,
+        "mode": "auto"
+      },
+      {
+        "time": 157.5,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8223,
+        "mode": "auto"
+      },
+      {
+        "time": 158.2,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8213,
+        "mode": "auto"
+      },
+      {
+        "time": 158.9,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8203,
+        "mode": "auto"
+      },
+      {
+        "time": 159.61,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8193,
+        "mode": "auto"
+      },
+      {
+        "time": 160.31,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8183,
+        "mode": "auto"
+      },
+      {
+        "time": 161.03,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8176,
+        "mode": "auto"
+      },
+      {
+        "time": 161.75,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8166,
+        "mode": "auto"
+      },
+      {
+        "time": 162.46,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8156,
+        "mode": "auto"
+      },
+      {
+        "time": 163.16,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8144,
+        "mode": "auto"
+      },
+      {
+        "time": 163.88,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8132,
+        "mode": "auto"
+      },
+      {
+        "time": 164.58,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8120,
+        "mode": "auto"
+      },
+      {
+        "time": 165.3,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8113,
+        "mode": "auto"
+      },
+      {
+        "time": 166.01,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8103,
+        "mode": "auto"
+      },
+      {
+        "time": 166.73,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8093,
+        "mode": "auto"
+      },
+      {
+        "time": 167.45,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8086,
+        "mode": "auto"
+      },
+      {
+        "time": 168.16,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8076,
+        "mode": "auto"
+      },
+      {
+        "time": 168.86,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8066,
+        "mode": "auto"
+      },
+      {
+        "time": 169.56,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8056,
+        "mode": "auto"
+      },
+      {
+        "time": 170.26,
+        "kind": "damage",
+        "value": 10,
+        "hp": 8046,
+        "mode": "auto"
+      },
+      {
+        "time": 170.98,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8039,
+        "mode": "auto"
+      },
+      {
+        "time": 171.68,
+        "kind": "damage",
+        "value": 7,
+        "hp": 8032,
+        "mode": "auto"
+      },
+      {
+        "time": 172.4,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8020,
+        "mode": "auto"
+      },
+      {
+        "time": 173.11,
+        "kind": "damage",
+        "value": 12,
+        "hp": 8008,
+        "mode": "auto"
+      },
+      {
+        "time": 173.83,
+        "kind": "damage",
+        "value": 12,
+        "hp": 7996,
+        "mode": "auto"
+      },
+      {
+        "time": 174.55,
+        "kind": "damage",
+        "value": 10,
+        "hp": 7986,
+        "mode": "auto"
+      },
+      {
+        "time": 175.26,
+        "kind": "damage",
+        "value": 10,
+        "hp": 7976,
+        "mode": "auto"
+      },
+      {
+        "time": 175.98,
+        "kind": "damage",
+        "value": 10,
+        "hp": 7966,
+        "mode": "auto"
+      },
+      {
+        "time": 176.7,
+        "kind": "damage",
+        "value": 10,
+        "hp": 7956,
+        "mode": "auto"
+      },
+      {
+        "time": 177.4,
+        "kind": "damage",
+        "value": 7,
+        "hp": 7949,
+        "mode": "auto"
+      },
+      {
+        "time": 178.11,
+        "kind": "damage",
+        "value": 12,
+        "hp": 7937,
+        "mode": "auto"
+      },
+      {
+        "time": 178.83,
+        "kind": "damage",
+        "value": 12,
+        "hp": 7925,
+        "mode": "auto"
+      },
+      {
+        "time": 179.53,
+        "kind": "damage",
+        "value": 10,
+        "hp": 7915,
+        "mode": "auto"
+      },
+      {
+        "time": 180,
+        "kind": "end",
+        "reason": "Trial complete"
+      }
+    ]
+  },
+  "questions": [
+    "When and why did you switch?",
+    "Which mode felt most useful?",
+    "Was the current mode clear?"
+  ]
+}
