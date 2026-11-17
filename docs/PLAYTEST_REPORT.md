@@ -34,3 +34,20 @@ The run started in Manual and recorded **11 switches**, six to Auto-fire and fiv
 All seven casts occurred in the first 38.3 seconds. The per-cast kills sum to eight and agree with the skill and settlement totals. The chef took 2,137 HP damage over 216 hits and finished with 7,863 HP.
 
 [Download P2 source JSON](playtest-data/food-survivors-p2-180s-qa.json)
+
+## Issues observed during playtesting
+
+| Status | Issue | Evidence and follow-up |
+| --- | --- | --- |
+| Fixed and reverified | Fatal hits overstated HP lost | Two 100-HP runs reported 102 and 105 damage. The fix caps each damage event at remaining HP and uses that value in the totals. Two subsequent lethal runs each reported exactly 100 HP lost. [Fix commit](https://github.com/yifeiyang19-code/CMPM170-Food-Survivors/commit/aaa9dd60105d036dd341d4aa847c0a37848fa622) |
+| Observed in earlier QA | Early deaths at standard health | An online P1 run ended at 65.9 s. A P2 run with at least one kill from each skill ended at 29.0 s. These are operator-run examples. In standard-health player sessions, compare survival time and when repeated contact damage begins. |
+| Observed in full-length QA | Flying Fork frequently yielded zero kills | Four of five casts yielded zero kills and the fifth killed two enemies. Ask players where they expected the fork to travel, then compare their answer with the actual facing and hit area. |
+| Observed during browser testing | Countdown slowed when the game was in the background or minimized | Progress resumed at close to normal pace once the tab was kept in the foreground. Reproduce with a timed desktop run that switches tabs and then returns, and compare elapsed wall time with the in-game timer. |
+
+## Potential issues to verify
+
+- **P1 · Switching may reflect habit or accidental input.** Manual is the starting mode, and Tab doubles as a switch key during play. Let participants choose when to switch, note accidental switches, and ask what prompted each intentional switch. The 11 QA switches were scheduled to exercise the control.
+- **P1 · Raw kills can mislead when exposure differs.** Mode time, enemy count, and pressure changed over the run. For balance comparisons, look at kills per active minute in comparable wave windows and pair the numbers with player comments.
+- **P2 · Facing and skill coverage may be hard to read while dodging.** Facing follows the last movement, so a sidestep can redirect a sweep or fork. Watch whether players notice the direction marker and can line up the fork’s 26 px strip before casting.
+- **P2 · Zero kills and the escape proxy can miss useful casts.** A zero-kill result cannot explain the aim or timing error, and the three-second radius check can miss a brief escape or count enemies that approach afterward. Compare these fields with observed movement and player explanations.
+- **Both modes · Later waves need standard-health coverage.** The full-length runs used 10,000 HP, and the P2 operator stopped casting after 38.3 s. Observe players in the first, middle, and final minutes to see when survivability and skill choices change.
