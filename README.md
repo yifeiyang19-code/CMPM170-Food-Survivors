@@ -51,7 +51,7 @@ Move with WASD or the arrow keys. Your last movement sets your facing, shown by 
 
 P2 uses skill-only combat. At the end, download the mode-labeled JSON for per-skill counts and each cast's position, facing, enemy count, kills, and follow-up pressure. P1 exports the original per-fire-mode statistics and switch events.
 
-See the [playtest plan](docs/PLAYTEST_PLAN.md) for facilitator instructions and telemetry definitions.
+See the [playtest plan](docs/PLAYTEST_PLAN.md) for facilitator instructions and telemetry definitions. See the [playtest report](docs/PLAYTEST_REPORT.md) for the full-length QA results and source exports.
 
 ## Team
 
