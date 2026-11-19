@@ -1,0 +1,256 @@
+{
+  "project": "Food Survivors",
+  "prototype": 2,
+  "experiment": "skill-placement",
+  "duration": 28.975299999997006,
+  "health": 0,
+  "stats": {
+    "kills": 10,
+    "damage": 100,
+    "damageHits": 11,
+    "events": [
+      {
+        "time": 6.68,
+        "kind": "damage",
+        "value": 10,
+        "hp": 90,
+        "x": 925.9164547582894,
+        "y": 237.9214547582862
+      },
+      {
+        "time": 12.18,
+        "kind": "damage",
+        "value": 10,
+        "hp": 80,
+        "x": 375.13705698007885,
+        "y": 463.40099999999785
+      },
+      {
+        "time": 14.51,
+        "kind": "damage",
+        "value": 12,
+        "hp": 68,
+        "x": 375.13705698007885,
+        "y": 102.95800000000027
+      },
+      {
+        "time": 16.38,
+        "kind": "damage",
+        "value": 7,
+        "hp": 61,
+        "x": 356.3469672866881,
+        "y": 176.62941030660872
+      },
+      {
+        "time": 17.09,
+        "kind": "damage",
+        "value": 12,
+        "hp": 49,
+        "x": 356.3469672866881,
+        "y": 290.1109103066108
+      },
+      {
+        "time": 22.21,
+        "kind": "damage",
+        "value": 10,
+        "hp": 39,
+        "x": 590.3450312765026,
+        "y": 488.23193601018494
+      },
+      {
+        "time": 23.86,
+        "kind": "damage",
+        "value": 12,
+        "hp": 27,
+        "x": 669.681930609363,
+        "y": 299.84490091985856
+      },
+      {
+        "time": 26.79,
+        "kind": "damage",
+        "value": 7,
+        "hp": 20,
+        "x": 937,
+        "y": 577
+      },
+      {
+        "time": 27.49,
+        "kind": "damage",
+        "value": 7,
+        "hp": 13,
+        "x": 937,
+        "y": 577
+      },
+      {
+        "time": 28.21,
+        "kind": "damage",
+        "value": 7,
+        "hp": 6,
+        "x": 937,
+        "y": 496.7066107827057
+      },
+      {
+        "time": 28.98,
+        "kind": "damage",
+        "value": 6,
+        "hp": 0,
+        "x": 937,
+        "y": 416.39660455605275
+      },
+      {
+        "time": 28.98,
+        "kind": "end",
+        "reason": "Chef overwhelmed"
+      }
+    ],
+    "casts": [
+      {
+        "skill": "knife",
+        "time": 2.5286999999970106,
+        "x": 480,
+        "y": 276.42949999999934,
+        "facingRadians": -1.5707963267948966,
+        "enemies": 2,
+        "nearbyBefore": 0,
+        "hp": 100,
+        "kills": 0,
+        "nearbyAfter3s": 0,
+        "escapedWithin3s": false
+      },
+      {
+        "skill": "whisk",
+        "time": 3.3952999999970177,
+        "x": 593.5755000000007,
+        "y": 249.00499999999664,
+        "facingRadians": 0,
+        "enemies": 3,
+        "nearbyBefore": 0,
+        "hp": 100,
+        "kills": 1,
+        "nearbyAfter3s": 2,
+        "escapedWithin3s": false
+      },
+      {
+        "skill": "fork",
+        "time": 6.728199999997013,
+        "x": 920.382990642116,
+        "y": 232.38799064211278,
+        "facingRadians": -2.356194490192345,
+        "enemies": 6,
+        "nearbyBefore": 2,
+        "hp": 90,
+        "kills": 1,
+        "nearbyAfter3s": 0,
+        "escapedWithin3s": true
+      },
+      {
+        "skill": "knife",
+        "time": 9.11129999999702,
+        "x": 639.509678664906,
+        "y": 470.5429687593036,
+        "facingRadians": 3.141592653589793,
+        "enemies": 8,
+        "nearbyBefore": 0,
+        "hp": 90,
+        "kills": 0,
+        "nearbyAfter3s": 2,
+        "escapedWithin3s": false
+      },
+      {
+        "skill": "fork",
+        "time": 15.160399999997002,
+        "x": 347.73605698007754,
+        "y": 23,
+        "facingRadians": 3.141592653589793,
+        "enemies": 15,
+        "nearbyBefore": 1,
+        "hp": 68,
+        "kills": 0,
+        "nearbyAfter3s": 0,
+        "escapedWithin3s": true
+      },
+      {
+        "skill": "knife",
+        "time": 16.110399999997,
+        "x": 336.9715343753971,
+        "y": 153.23547739531617,
+        "facingRadians": 0.7853981633974483,
+        "enemies": 16,
+        "nearbyBefore": 4,
+        "hp": 68,
+        "kills": 2,
+        "nearbyAfter3s": 0,
+        "escapedWithin3s": true
+      },
+      {
+        "skill": "whisk",
+        "time": 19.10999999999701,
+        "x": 360.2714672866874,
+        "y": 577,
+        "facingRadians": 0,
+        "enemies": 17,
+        "nearbyBefore": 0,
+        "hp": 49,
+        "kills": 5,
+        "nearbyAfter3s": 6,
+        "escapedWithin3s": false
+      },
+      {
+        "skill": "knife",
+        "time": 22.892899999997002,
+        "x": 641.6222363633898,
+        "y": 399.6300421139488,
+        "facingRadians": 3.141592653589793,
+        "enemies": 17,
+        "nearbyBefore": 3,
+        "hp": 39,
+        "kills": 1,
+        "nearbyAfter3s": 0,
+        "escapedWithin3s": true
+      },
+      {
+        "skill": "fork",
+        "time": 23.87599999999699,
+        "x": 669.681930609363,
+        "y": 299.84490091985856,
+        "facingRadians": 3.141592653589793,
+        "enemies": 17,
+        "nearbyBefore": 2,
+        "hp": 27,
+        "kills": 0,
+        "nearbyAfter3s": 1,
+        "escapedWithin3s": false
+      }
+    ],
+    "skills": {
+      "knife": {
+        "casts": 4,
+        "kills": 3,
+        "emptyCasts": 2,
+        "emptyCastRate": 0.5
+      },
+      "fork": {
+        "casts": 3,
+        "kills": 1,
+        "emptyCasts": 2,
+        "emptyCastRate": 0.6666666666666666
+      },
+      "whisk": {
+        "casts": 2,
+        "kills": 6,
+        "emptyCasts": 0,
+        "emptyCastRate": 0
+      }
+    },
+    "mostUsedSkills": [
+      "knife"
+    ],
+    "incompleteCast": null
+  },
+  "questions": [
+    "Which skill did you use most, and why?",
+    "Which was easiest to understand? Which was hardest to use well?",
+    "Did you change your position, facing, or timing to set up a cast?",
+    "When did you use the cyclone: to escape, to clear enemies, or for another reason?"
+  ]
+}
