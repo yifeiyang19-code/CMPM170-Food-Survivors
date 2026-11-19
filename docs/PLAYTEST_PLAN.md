@@ -12,7 +12,7 @@ Ask when they switched and why, which mode felt useful, and whether mode feedbac
 
 ## P2 · Kitchen Skills
 
-Show movement, the facing indicator, skill keys 1–3, and the cooldown display. Let each player decide how to use the skills. Observe adjustments to approach angle, attempts to line up or group enemies, and cyclone use under pressure.
+Show movement, independent mouse aim, the facing arrow, skill keys 1–3, and cooldowns. Demonstrate that the lane and sector follow the mouse while the chef strafes. Ask the participant to point out a highlighted target before the first cast. Let each player decide how to use the skills. Observe adjustments to approach angle, attempts to line up or group enemies, and cyclone use under pressure.
 
 1. Which skill did you use most, and why?
 2. Which skill was easiest to understand? Which was hardest to use well?
