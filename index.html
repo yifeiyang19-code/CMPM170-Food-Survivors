@@ -9,7 +9,7 @@
 a{color:#a8deff;text-underline-offset:3px}a:focus-visible,button:focus-visible{outline:3px solid white;outline-offset:4px}
 .back{display:inline-block;margin-bottom:12px}.skill{border-bottom:1px solid #526177;padding:8px 0}.skill p{margin:3px 0;font-size:.9rem;color:#d4deed}
 .skill output{display:block;color:#ffdc9c;font-weight:700;font-variant-numeric:tabular-nums}
-.spatial canvas{cursor:default}.spatial .layout{grid-template-columns:minmax(0,1fr) 250px}
+.spatial canvas{cursor:crosshair}.spatial .layout{grid-template-columns:minmax(0,1fr) 250px}
 @media(max-width:750px){.spatial .layout{grid-template-columns:1fr}}table{width:100%;border-collapse:collapse}td,th{text-align:left;border-bottom:1px solid #526177;padding:7px}@media(max-width:750px){.layout{grid-template-columns:1fr}}
 </style></head><body><main class="wrap home" id="home">
   <h1>FOOD SURVIVORS</h1>
@@ -33,10 +33,10 @@ a{color:#a8deff;text-underline-offset:3px}a:focus-visible,button:focus-visible{o
 <aside class="panel" id="p1Controls"><h3>Controls</h3><p>WASD / arrows: move<br>Mouse: aim<br>Hold left-click / Space: fire manually<br>M / Tab: switch modes</p><p><b class="manual">MANUAL</b>: precise, faster, stronger; requires aiming.</p><p><b class="auto">AUTO</b>: fires automatically toward nearest foe, but weaker and slower.</p><button id="start">START / RESTART</button><button id="switch">SWITCH MODE</button><hr><p>Switches: <b id="switches">0</b><br>Manual time: <b id="mt">0</b>s<br>Auto time: <b id="at">0</b>s<br>Damage taken: <b id="damage">0</b></p></aside>
 <aside class="panel" id="p2Controls" hidden>
   <h3>Controls</h3>
-  <p>WASD / arrows to move. Your last movement sets your facing.</p>
-  <div class="skill"><b><kbd>1</kbd> Knife Sweep</b><p>Clear a short, wide arc ahead.</p><output id="knifeState">Ready</output></div>
-  <div class="skill"><b><kbd>2</kbd> Flying Fork</b><p>Pierce enemies in a straight line ahead.</p><output id="forkState">Ready</output></div>
-  <div class="skill"><b><kbd>3</kbd> Whisk Cyclone</b><p>Move through enemies with contact immunity.</p><output id="whiskState">Ready</output></div>
+  <p>WASD / arrows to move. Move the mouse over the arena to aim independently. Before using the mouse, movement sets your facing.</p>
+  <div class="skill"><b><kbd>1</kbd> Knife Sweep</b><p>Clear the visible 120° arc ahead. Bright outlines mark targets.</p><output id="knifeState">Ready</output></div>
+  <div class="skill"><b><kbd>2</kbd> Flying Fork</b><p>Aim along the 500 px lane. Outlined enemies are in the 26 px hit strip.</p><output id="forkState">Ready</output></div>
+  <div class="skill"><b><kbd>3</kbd> Whisk Cyclone</b><p>Clear enemies inside the 55 px ring for 2.5 s with contact immunity.</p><output id="whiskState">Ready</output></div>
   <button id="startP2">START / RESTART</button>
 </aside></div>
 <section id="results" class="panel"><h2>Playtest results</h2><p id="summary"></p><table><thead><tr id="columns"><th>Metric</th><th>Manual</th><th>Auto</th></tr></thead><tbody id="table"></tbody></table><button id="download">DOWNLOAD PLAYTEST JSON</button><p id="interview">Ask the player: When did you switch? Why? Did you know which mode you were in?</p></section>
@@ -49,6 +49,12 @@ if (requestedMode !== 'p1' && requestedMode !== 'p2') return;
 const spatial = requestedMode === 'p2';
 const qaSurvival = new URLSearchParams(location.search).get('qa') === 'survival';
 const startingHealth = qaSurvival ? 10000 : 100;
+const buildVersion = '2026-11-19-aim-and-pressure';
+const encounter = {
+  startPeriod: 1.5, minimumPeriod: 0.85, ramp: 0.003,
+  enemyLimit: spatial ? 28 : 36,
+  speedMultiplier: 0.75, damageMultiplier: 0.5, contactGrace: 1.2
+};
 const c=document.getElementById('game'),g=c.getContext('2d'),W=c.width,H=c.height,$=id=>document.getElementById(id),DURATION=180;
 const skills = {
   knife: { name: 'Knife Sweep', cooldown: 6, radius: 110, halfAngle: Math.PI / 3 },
@@ -76,9 +82,12 @@ if (spatial) {
 if (qaSurvival) $('subtitle').textContent += ' · QA only · 10,000 starting HP';
 let phase='ready',mode='manual',clock=0,last=0,spawner=0,player,enemies=[],bullets=[],keys=new Set(),mouse={x:600,y:300,down:false},stats,raf,id=0;
 let facing, readyAt, effects, cyclone, pendingCasts, castsToReview;
+let pointerAim = false, previewSkill = 'fork';
 function reset(){cancelAnimationFrame(raf);phase='ready';mode='manual';clock=0;spawner=0;id=0;player={x:480,y:300,hp:startingHealth,cool:0,inv:0};enemies=[];bullets=[];keys.clear();mouse.down=false;stats={switches:0,kills:0,damage:0,modes:{manual:{time:0,shots:0,hits:0,kills:0,damage:0},auto:{time:0,shots:0,hits:0,kills:0,damage:0}},events:[]};
 if (spatial) {
   facing = 0;
+  pointerAim = false;
+  previewSkill = 'fork';
   readyAt = { knife: 0, fork: 0, whisk: 0 };
   effects = [];
   cyclone = null;
@@ -89,15 +98,24 @@ if (spatial) {
     skills: Object.fromEntries(Object.keys(skills).map(key => [key, { casts: 0, kills: 0, emptyCasts: 0, emptyCastRate: null }]))
   };
 }
+$('summary').textContent = '';
 $('results').style.display='none';$('status').textContent='Press START to begin.';hud();render()}
 function start(){reset();phase='playing';last=performance.now();$('status').textContent=spatial ? 'Survive using the three kitchen skills.' : 'Survive and switch modes when useful.';raf=requestAnimationFrame(loop)}
 function switchMode(){if(spatial||phase!=='playing')return;const old=mode;mode=mode==='manual'?'auto':'manual';stats.switches++;stats.events.push({time:+clock.toFixed(2),kind:'switch',from:old,to:mode,hp:player.hp,enemies:enemies.length});hud()}
-function spawn(){let side=Math.floor(Math.random()*4),x=side===0?-30:side===1?W+30:Math.random()*W,y=side===2?-30:side===3?H+30:Math.random()*H;const kind=['pickle','egg','hotdog'][Math.floor(Math.random()*3)],spec=kind==='pickle'?[14,40,80,7]:kind==='egg'?[19,60,62,10]:[18,75,55,12];enemies.push({id:id++,x,y,kind,r:spec[0],hp:spec[1],maxHp:spec[1],speed:spec[2],damage:spec[3]})}
+function spawn(){let side=Math.floor(Math.random()*4),x=side===0?-30:side===1?W+30:Math.random()*W,y=side===2?-30:side===3?H+30:Math.random()*H;const kind=['pickle','egg','hotdog'][Math.floor(Math.random()*3)],spec=kind==='pickle'?[14,40,80,7]:kind==='egg'?[19,60,62,10]:[18,75,55,12];enemies.push({id:id++,x,y,kind,r:spec[0],hp:spec[1],maxHp:spec[1],speed:spec[2]*encounter.speedMultiplier,damage:Math.round(spec[3]*encounter.damageMultiplier)})}
 function nearest(){let target=null,best=Infinity;for(const e of enemies){const d=(e.x-player.x)**2+(e.y-player.y)**2;if(d<best){best=d;target=e}}return target}
 function shoot(x,y){let dx=x-player.x,dy=y-player.y,len=Math.hypot(dx,dy)||1;const speed=mode==='manual'?670:460;bullets.push({x:player.x,y:player.y,vx:dx/len*speed,vy:dy/len*speed,life:1.4,damage:mode==='manual'?34:20,source:mode});stats.modes[mode].shots++}
 // Nearby enemy centers at cast time and three seconds later provide a consistent escape proxy.
 const pressureRadius = 120;
 const reviewDelay = 3;
+function updateFacing(dx = 0, dy = 0) {
+  if (pointerAim) {
+    const x = mouse.x - player.x, y = mouse.y - player.y;
+    if (Math.hypot(x, y) > 4) facing = Math.atan2(y, x);
+  } else if (dx || dy) {
+    facing = Math.atan2(dy, dx);
+  }
+}
 function nearbyEnemies() {
   return enemies.filter(e => e.hp > 0 && Math.hypot(e.x - player.x, e.y - player.y) <= pressureRadius).length;
 }
@@ -108,10 +126,12 @@ function defeat(enemy, cast) {
   stats.skills[cast.skill].kills++;
 }
 function castSkill(key) {
+  updateFacing();
   if (clock < readyAt[key]) return;
   const skill = skills[key];
   readyAt[key] = clock + skill.cooldown;
   const cast = {
+    aimSource: pointerAim ? 'mouse' : 'movement',
     skill: key, time: clock, x: player.x, y: player.y, facingRadians: facing,
     enemies: enemies.filter(e => e.hp > 0).length, nearbyBefore: nearbyEnemies(),
     hp: player.hp, kills: 0, nearbyAfter3s: null, escapedWithin3s: null
@@ -124,23 +144,27 @@ function castSkill(key) {
     return;
   }
   effects.push({ key, cast, until: clock + 0.24 });
-  const fx = Math.cos(facing), fy = Math.sin(facing);
   for (const e of enemies) {
-    if (e.hp <= 0) continue;
-    const x = e.x - player.x, y = e.y - player.y;
-    const forward = x * fx + y * fy;
-    const lateral = x * fy - y * fx;
-    const distance = Math.hypot(x, y);
-    const hit = key === 'knife'
-      ? distance <= skill.radius && forward >= distance * Math.cos(skill.halfAngle)
-      : forward >= 0 && forward <= skill.range && Math.abs(lateral) <= skill.width / 2;
-    if (hit) defeat(e, cast);
+    if (e.hp > 0 && skillContains(key, e, cast.x, cast.y, cast.facingRadians)) defeat(e, cast);
   }
 }
+function skillContains(key, enemy, originX = player.x, originY = player.y, angle = facing) {
+  const skill = skills[key];
+  const x = enemy.x - originX, y = enemy.y - originY;
+  if (key === 'whisk') return Math.hypot(x, y) <= skill.radius + enemy.r;
+  const fx = Math.cos(angle), fy = Math.sin(angle);
+  const forward = x * fx + y * fy;
+  if (key === 'knife') {
+    const distance = Math.hypot(x, y);
+    return distance <= skill.radius && forward >= distance * Math.cos(skill.halfAngle);
+  }
+  return forward >= 0 && forward <= skill.range && Math.abs(x * fy - y * fx) <= skill.width / 2;
+}
+
 function cycloneHits() {
   if (!cyclone) return;
   for (const e of enemies) {
-    if (e.hp > 0 && Math.hypot(e.x - player.x, e.y - player.y) <= skills.whisk.radius + e.r) {
+    if (e.hp > 0 && skillContains('whisk', e)) {
       defeat(e, cyclone.cast);
     }
   }
@@ -152,9 +176,10 @@ function reviewCasts() {
     cast.escapedWithin3s = cast.nearbyBefore > 0 && cast.nearbyAfter3s === 0 && player.hp > 0;
   }
 }
-function tick(dt){dt=Math.min(dt,DURATION-clock);clock+=dt;if(!spatial)stats.modes[mode].time+=dt;const dx=Number(keys.has('d')||keys.has('arrowright'))-Number(keys.has('a')||keys.has('arrowleft')),dy=Number(keys.has('s')||keys.has('arrowdown'))-Number(keys.has('w')||keys.has('arrowup')),len=Math.hypot(dx,dy)||1;player.x=Math.max(23,Math.min(W-23,player.x+235*dx/len*dt));player.y=Math.max(23,Math.min(H-23,player.y+235*dy/len*dt));player.cool-=dt;player.inv=Math.max(0,player.inv-dt);spawner+=dt;const period=Math.max(.32,.9-clock*.0024);while(spawner>=period){spawner-=period;spawn();if(clock>65&&Math.random()<.23)spawn()}
+function tick(dt){dt=Math.min(dt,DURATION-clock);clock+=dt;if(!spatial)stats.modes[mode].time+=dt;const dx=Number(keys.has('d')||keys.has('arrowright'))-Number(keys.has('a')||keys.has('arrowleft')),dy=Number(keys.has('s')||keys.has('arrowdown'))-Number(keys.has('w')||keys.has('arrowup')),len=Math.hypot(dx,dy)||1;player.x=Math.max(23,Math.min(W-23,player.x+235*dx/len*dt));player.y=Math.max(23,Math.min(H-23,player.y+235*dy/len*dt));player.cool-=dt;player.inv=Math.max(0,player.inv-dt);spawner+=dt;const period=Math.max(encounter.minimumPeriod,encounter.startPeriod-clock*encounter.ramp);
+while(spawner>=period){spawner-=period;if(enemies.length<encounter.enemyLimit)spawn()}
 if (spatial) {
-  if (dx || dy) facing = Math.atan2(dy, dx);
+  updateFacing(dx, dy);
   if (cyclone && clock >= cyclone.until) cyclone = null;
   for (const key of pendingCasts) castSkill(key);
   pendingCasts.length = 0;
@@ -165,7 +190,7 @@ if(!spatial&&player.cool<=0){if(mode==='manual'&&(mouse.down||keys.has(' '))){sh
 for(const b of bullets){b.x+=b.vx*dt;b.y+=b.vy*dt;b.life-=dt;if(b.x<0||b.x>W||b.y<0||b.y>H)b.life=0}
 for(const e of enemies){if(e.hp<=0)continue;const vx=player.x-e.x,vy=player.y-e.y,d=Math.hypot(vx,vy)||1;e.x+=vx/d*e.speed*dt;e.y+=vy/d*e.speed*dt;if(!cyclone&&d<e.r+18&&player.inv<=0){const damage = Math.min(player.hp, e.damage);
 player.hp -= damage;
-player.inv = .7;
+player.inv = encounter.contactGrace;
 stats.damage += damage;
 const hit = {time:+clock.toFixed(2),kind:'damage',value:damage,hp:player.hp};
 if (spatial) {
@@ -211,6 +236,39 @@ function hud(){$('hp').textContent=player.hp;$('kills').textContent=stats.kills;
 $('mode').textContent=mode.toUpperCase();$('mode').className=mode;
 $('switches').textContent=stats.switches;$('mt').textContent=stats.modes.manual.time.toFixed(0);$('at').textContent=stats.modes.auto.time.toFixed(0);$('damage').textContent=stats.damage}
 function circle(x,y,r,col){g.fillStyle=col;g.beginPath();g.arc(x,y,r,0,Math.PI*2);g.fill()}
+function renderGuides() {
+  if (phase !== 'playing') return;
+  g.save();
+  g.translate(player.x, player.y);
+  g.rotate(facing);
+  // Each outline uses the same dimensions and facing as skillContains.
+  const ready = clock >= readyAt[previewSkill];
+  g.strokeStyle = ready ? '#4b347c' : '#6b6274';
+  g.lineWidth = 2;
+  g.setLineDash(ready ? [] : [6, 6]);
+  g.fillStyle = ready ? '#63458016' : '#5b52670c';
+  g.beginPath();
+  g.moveTo(0, 0);
+  g.arc(0, 0, skills.knife.radius, -skills.knife.halfAngle, skills.knife.halfAngle);
+  g.closePath();
+  g.fill();
+  g.stroke();
+  g.fillRect(0, -skills.fork.width / 2, skills.fork.range, skills.fork.width);
+  g.strokeRect(0, -skills.fork.width / 2, skills.fork.range, skills.fork.width);
+  g.beginPath();
+  g.arc(0, 0, skills.whisk.radius, 0, Math.PI * 2);
+  g.stroke();
+  g.setLineDash([]);
+  g.lineWidth = 4;
+  g.beginPath();
+  g.moveTo(25, 0);
+  g.lineTo(47, 0);
+  g.lineTo(38, -7);
+  g.moveTo(47, 0);
+  g.lineTo(38, 7);
+  g.stroke();
+  g.restore();
+}
 function renderSkills() {
   for (const { key, cast, until } of effects) {
     g.save();
@@ -264,23 +322,34 @@ function renderSkills() {
   }
 }
 function render(){g.fillStyle='#e6ba79';g.fillRect(0,0,W,H);g.strokeStyle='#daa86c';for(let x=0;x<W;x+=60){g.beginPath();g.moveTo(x,0);g.lineTo(x,H);g.stroke()}for(let y=0;y<H;y+=60){g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke()}
-for(const e of enemies){g.save();g.translate(e.x,e.y);if(e.kind==='pickle'){g.fillStyle='#60ad59';g.beginPath();g.roundRect(-12,-19,24,38,12);g.fill()}else if(e.kind==='egg'){circle(0,0,19,'#fff7e5');circle(3,0,10,'#ffbf33')}else{g.fillStyle='#f3ac52';g.beginPath();g.roundRect(-21,-12,42,24,12);g.fill();g.fillStyle='#bd6050';g.fillRect(-17,-5,34,10)}circle(-5,-4,2,'#263547');circle(6,-4,2,'#263547');g.fillStyle='#405166';g.fillRect(-e.r,-e.r-12,e.r*2,3);g.fillStyle='#80d47c';g.fillRect(-e.r,-e.r-12,e.r*2*(e.hp/e.maxHp),3);g.restore()}
+if(spatial)renderGuides();
+for(const e of enemies){g.save();g.translate(e.x,e.y);if(e.kind==='pickle'){g.fillStyle='#60ad59';g.beginPath();g.roundRect(-12,-19,24,38,12);g.fill()}else if(e.kind==='egg'){circle(0,0,19,'#fff7e5');circle(3,0,10,'#ffbf33')}else{g.fillStyle='#f3ac52';g.beginPath();g.roundRect(-21,-12,42,24,12);g.fill();g.fillStyle='#bd6050';g.fillRect(-17,-5,34,10)}circle(-5,-4,2,'#263547');circle(6,-4,2,'#263547');g.fillStyle='#405166';g.fillRect(-e.r,-e.r-12,e.r*2,3);g.fillStyle='#80d47c';g.fillRect(-e.r,-e.r-12,e.r*2*(e.hp/e.maxHp),3);g.restore();
+if(spatial && phase==='playing' && clock >= readyAt[previewSkill] && skillContains(previewSkill, e)){
+  g.strokeStyle='#fff8d8';g.lineWidth=3;g.beginPath();g.arc(e.x,e.y,e.r+5,0,Math.PI*2);g.stroke();
+}}
 if(spatial)renderSkills();
 for(const b of bullets)circle(b.x,b.y,5,b.source==='manual'?'#258bc5':'#ec8831');g.save();if(player.inv>0&&Math.floor(clock*18)%2===0)g.globalAlpha=.4;circle(player.x,player.y,19,'#fff5e8');circle(player.x,player.y+4,13,'#ecb890');g.fillStyle='#fff';g.beginPath();g.roundRect(player.x-16,player.y-25,32,10,4);g.fill();circle(player.x-9,player.y-24,8,'#fff');circle(player.x,player.y-27,9,'#fff');circle(player.x+9,player.y-24,8,'#fff');circle(player.x-5,player.y,2,'#27364e');circle(player.x+5,player.y,2,'#27364e');g.strokeStyle=spatial?'#634580':mode==='manual'?'#36b6ff':'#ffbd4e';g.lineWidth=3;g.beginPath();g.arc(player.x,player.y,24,0,Math.PI*2);g.stroke();g.restore();
 if (spatial) {
   circle(player.x + 27 * Math.cos(facing), player.y + 27 * Math.sin(facing), 5, '#513265');
 }
 if(!spatial&&phase==='playing'&&mode==='manual'){g.strokeStyle='#177daf';g.lineWidth=2;g.beginPath();g.arc(mouse.x,mouse.y,11,0,Math.PI*2);g.moveTo(mouse.x-18,mouse.y);g.lineTo(mouse.x-7,mouse.y);g.moveTo(mouse.x+7,mouse.y);g.lineTo(mouse.x+18,mouse.y);g.stroke()}
-if(phase!=='playing'){g.fillStyle='#1c2946b8';g.fillRect(0,0,W,H);g.fillStyle='#fff8df';g.textAlign='center';g.font='bold 42px system-ui';g.fillText(phase==='ready'?'FOOD SURVIVORS':'TRIAL COMPLETE',W/2,260);g.font='21px system-ui';g.fillText(spatial?'Kitchen Skills':'Manual Aim vs Auto-fire',W/2,312);g.font='17px system-ui';g.fillText(spatial?'WASD move & face · 1 Sweep · 2 Fork · 3 Cyclone':'WASD move · M switch · mouse aim · hold click / Space fire',W/2,350)}}
+if(phase!=='playing'){g.fillStyle='#1c2946b8';g.fillRect(0,0,W,H);g.fillStyle='#fff8df';g.textAlign='center';g.font='bold 42px system-ui';g.fillText(phase==='ready'?'FOOD SURVIVORS':'TRIAL COMPLETE',W/2,260);g.font='21px system-ui';g.fillText(spatial?'Kitchen Skills':'Manual Aim vs Auto-fire',W/2,312);g.font='17px system-ui';g.fillText(spatial?'WASD move · Mouse aim · 1 Sweep · 2 Fork · 3 Cyclone':'WASD move · M switch · mouse aim · hold click / Space fire',W/2,350)}}
 function loop(now){if(phase!=='playing'){render();return}let dt=Math.min(.04,Math.max(0,(now-last)/1000));last=now;tick(dt);render();if(phase==='playing')raf=requestAnimationFrame(loop)}
 function aim(e){const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height}}
 window.addEventListener('keydown',e=>{const k=e.key.toLowerCase();if(phase!=='playing')return;
 const movementKey = ['arrowup','arrowdown','arrowleft','arrowright'].includes(k);
 if(movementKey||(!spatial&&(k===' '||k==='tab')))e.preventDefault();
 if(!e.repeat){
-  if(spatial&&Object.hasOwn(skillKeys,k))pendingCasts.push(skillKeys[k]);
+  if(spatial&&Object.hasOwn(skillKeys,k)){previewSkill=skillKeys[k];pendingCasts.push(previewSkill);}
   if(!spatial&&(k==='m'||k==='tab'))switchMode();
 }
-keys.add(k)});window.addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));window.addEventListener('blur',()=>{keys.clear();mouse.down=false;if(spatial)pendingCasts.length=0});c.addEventListener('pointermove',e=>Object.assign(mouse,aim(e)));c.addEventListener('pointerdown',e=>{Object.assign(mouse,aim(e));mouse.down=true});window.addEventListener('pointerup',()=>mouse.down=false);$('start').onclick=start;$('startP2').onclick=start;$('switch').onclick=switchMode;$('download').onclick=()=>{const data={project:'Food Survivors',...(qaSurvival ? {qa: 'survival', startingHealth} : {}),prototype:spatial?2:1,experiment:spatial?'skill-placement':'fire-mode-switching',duration:clock,health:player.hp,stats,questions:spatial?spatialQuestions:['When and why did you switch?','Which mode felt most useful?','Was the current mode clear?']};const u=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=u;a.download=`food-survivors-${requestedMode}-playtest.json`;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};reset();
+keys.add(k)});window.addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));window.addEventListener('blur',()=>{keys.clear();mouse.down=false;if(spatial)pendingCasts.length=0});c.addEventListener('pointermove',e=>{
+  Object.assign(mouse,aim(e));
+  if(spatial){pointerAim=true;updateFacing();if(phase!=='playing')render()}
+});
+for(const key of Object.keys(skills)){
+  $(key+'State').parentElement.addEventListener('pointerenter',()=>{previewSkill=key});
+}
+c.addEventListener('pointerdown',e=>{Object.assign(mouse,aim(e));mouse.down=true});window.addEventListener('pointerup',()=>mouse.down=false);$('start').onclick=start;$('startP2').onclick=start;$('switch').onclick=switchMode;$('download').onclick=()=>{const data={project:'Food Survivors',buildVersion,startingHealth,encounter:{...encounter},...(qaSurvival ? {qa: 'survival', startingHealth} : {}),prototype:spatial?2:1,experiment:spatial?'skill-placement':'fire-mode-switching',duration:clock,health:player.hp,stats,questions:spatial?spatialQuestions:['When and why did you switch?','Which mode felt most useful?','Was the current mode clear?']};const u=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=u;a.download=`food-survivors-${requestedMode}-playtest.json`;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};reset();
 })();
 </script></body></html>
