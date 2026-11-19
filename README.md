@@ -41,7 +41,7 @@ The modes intentionally differ in power and control. These are starting hypothes
 
 **Research question:** How do skill shapes affect where players move, how they face, how they group enemies, and when they cast?
 
-Move with WASD or the arrow keys. Your last movement sets your facing, shown by the dot beside the chef. All three skills start ready. Cooldowns begin on cast.
+Move with WASD or the arrow keys. Move the mouse over the arena to aim independently while moving. Before the first mouse movement, the last movement direction supplies facing. The arrow, 120° sector, 500 × 26 px lane, and 55 px ring preview skill coverage. Bright outlines identify enemies hit by the selected skill when ready. Pressing 1–3 or hovering a skill card selects its target highlight. All three skills start ready. Cooldowns begin on cast.
 
 | Key | Skill | Effect | Cooldown |
 | --- | --- | --- | --- |
@@ -49,7 +49,9 @@ Move with WASD or the arrow keys. Your last movement sets your facing, shown by 
 | 2 | Flying Fork | Pierces enemies whose centers lie in a 500 px long, 26 px wide forward strip | 8 s |
 | 3 | Whisk Cyclone | Moves with the chef for 2.5 s, clearing enemies that overlap the 55 px radius and granting contact immunity | 15 s |
 
-P2 uses skill-only combat. At the end, download the mode-labeled JSON for per-skill counts and each cast's position, facing, enemy count, kills, and follow-up pressure. P1 exports the original per-fire-mode statistics and switch events.
+Both trials start at 100 HP. Enemy generation ramps from one every 1.5 seconds to one every 0.96 seconds at 180 seconds, with a limit of 36 enemies in P1 and 28 in P2. Enemy speed is 75% of the original, contact damage is 4/5/6 HP by enemy type, and damage grants 1.2 seconds of contact protection.
+
+P2 uses skill-only combat. At the end, download the mode-labeled JSON for per-skill counts and each cast's position, facing, enemy count, kills, and follow-up pressure. P1 exports per-fire-mode statistics and switch events. New exports include the build version, starting HP, encounter settings, and P2 cast aim source to support comparisons across updates.
 
 See the [playtest plan](docs/PLAYTEST_PLAN.md) for facilitator instructions and telemetry definitions. See the [playtest report](docs/PLAYTEST_REPORT.md) for the full-length QA results and source exports.
 
